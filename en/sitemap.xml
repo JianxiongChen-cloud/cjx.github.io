@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://jianxiongchen-cloud.github.io/cjx.github.io/</loc>
-    <lastmod>2024-10-21T13:12:20+08:00</lastmod>
+    <lastmod>2020-10-09T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -13,25 +13,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://jianxiongchen-cloud.github.io/cjx.github.io/"
-                />
-  </url><url>
-    <loc>https://jianxiongchen-cloud.github.io/cjx.github.io/p/myfirstblog/</loc>
-    <lastmod>2024-10-21T13:12:20+08:00</lastmod>
-  </url><url>
-    <loc>https://jianxiongchen-cloud.github.io/cjx.github.io/p/myfirstblog/</loc>
-    <lastmod>2024-10-21T13:12:20+08:00</lastmod>
-  </url><url>
-    <loc>https://jianxiongchen-cloud.github.io/cjx.github.io/post/</loc>
-    <lastmod>2024-10-21T13:12:20+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://jianxiongchen-cloud.github.io/cjx.github.io/zh-cn/post/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://jianxiongchen-cloud.github.io/cjx.github.io/post/"
                 />
   </url><url>
     <loc>https://jianxiongchen-cloud.github.io/cjx.github.io/categories/</loc>
@@ -58,6 +39,19 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://jianxiongchen-cloud.github.io/cjx.github.io/p/test-chinese/"
+                />
+  </url><url>
+    <loc>https://jianxiongchen-cloud.github.io/cjx.github.io/post/</loc>
+    <lastmod>2020-09-09T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://jianxiongchen-cloud.github.io/cjx.github.io/zh-cn/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://jianxiongchen-cloud.github.io/cjx.github.io/post/"
                 />
   </url><url>
     <loc>https://jianxiongchen-cloud.github.io/cjx.github.io/categories/test/</loc>
@@ -169,6 +163,10 @@
                 hreflang="en"
                 href="https://jianxiongchen-cloud.github.io/cjx.github.io/about/"
                 />
+  </url><url>
+    <loc>https://jianxiongchen-cloud.github.io/cjx.github.io/p/</loc>
+  </url><url>
+    <loc>https://jianxiongchen-cloud.github.io/cjx.github.io/p/</loc>
   </url><url>
     <loc>https://jianxiongchen-cloud.github.io/cjx.github.io/links/</loc>
   </url><url>
