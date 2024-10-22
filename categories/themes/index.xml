@@ -8,12 +8,78 @@
         <language>en</language>
         <copyright>Jianxiong Chen</copyright>
         <lastBuildDate>Tue, 22 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://jianxiongchen-cloud.github.io/cjx.github.io/categories/themes/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>基因差异表达分析</title>
+        <link>https://jianxiongchen-cloud.github.io/cjx.github.io/p/%E5%9F%BA%E5%9B%A0%E5%B7%AE%E5%BC%82%E8%A1%A8%E8%BE%BE%E5%88%86%E6%9E%90/</link>
+        <pubDate>Tue, 22 Oct 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://jianxiongchen-cloud.github.io/cjx.github.io/p/%E5%9F%BA%E5%9B%A0%E5%B7%AE%E5%BC%82%E8%A1%A8%E8%BE%BE%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;img src="https://jianxiongchen-cloud.github.io/cjx.github.io/p/%E5%9F%BA%E5%9B%A0%E5%B7%AE%E5%BC%82%E8%A1%A8%E8%BE%BE%E5%88%86%E6%9E%90/1729597834517.jpg" alt="Featured image of post 基因差异表达分析" /&gt;&lt;h1 id=&#34;基因差异表达分析&#34;&gt;基因差异表达分析
+&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id=&#34;差异表达分析理论&#34;&gt;差异表达分析理论
+&lt;/h2&gt;&lt;p&gt;基于RNA-seq的差异表达分析&lt;a class=&#34;link&#34; href=&#34;https://blingarida.github.io/2019/10/10/Differential%20expression%20analysis/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Differential expression analysis&lt;/a&gt;的背景及标准流程。&lt;/p&gt;
+&lt;h2 id=&#34;基于在线网站的分析&#34;&gt;基于在线网站的分析
+&lt;/h2&gt;&lt;h3 id=&#34;tcga数据库&#34;&gt;TCGA数据库
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;简介&lt;/strong&gt;：TCGA数据库全称为The Cancer Genome Atlas，主要储存关于各类肿瘤的一个基本信息，包括RNAseq，miRNAseq，DNA甲基化，CNV，SNP等信息，它是目前为止可以获得的公开数据库里面数据相对全面的一个，在各个领域得到了广泛的应用，为肿瘤基础医学和转化医学研究者提供了海量的基因组数据和与其关联的临床数据,这为挖掘有意义的基因组变化和发现影响肿瘤起始、发展、分化、转移等生物学机制提供了海量数据基础。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;在线分析网站&lt;/strong&gt;：
+cBioportal(&lt;a class=&#34;link&#34; href=&#34;https://www.cbioportal.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;cBioPortal for Cancer Genomics&lt;/a&gt;)
+GEPIA2(&lt;a class=&#34;link&#34; href=&#34;http://gepia2.cancer-pku.cn/#index&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GEPIA 2&lt;/a&gt;)&lt;/p&gt;
+&lt;h3 id=&#34;geo数据库&#34;&gt;GEO数据库
+&lt;/h3&gt;&lt;p&gt;1、GEO数据库介绍及检索：
+&lt;a class=&#34;link&#34; href=&#34;https://www.dxy.cn/bbs/newweb/pc/post/41987780&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GEO数据库&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;2、GEO2R在线分析差异表达基因&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1pG4y1r7vx/?vd_source=091cd6aed0a9811f8b13926e6c46c60b&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GEO数据库介绍（四）：GEO2R在线分析筛选差异基因_哔哩哔哩_bilibili&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;利用r语言进行生信分析&#34;&gt;利用R语言进行生信分析
+&lt;/h2&gt;&lt;h3 id=&#34;r语言基础及学习教程&#34;&gt;R语言基础及学习教程
+&lt;/h3&gt;&lt;p&gt;1、R语言学习
+学习视频可以参考生信技能树相关视频：&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1cs411j75B/?spm_id_from=333.337.search-card.all.click&amp;amp;vd_source=091cd6aed0a9811f8b13926e6c46c60b&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【生信技能树】生信人应该这样学R语言_哔哩哔哩_bilibili&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;R语言基础知识可参考：
+&lt;a class=&#34;link&#34; href=&#34;https://cloud.tencent.com/developer/article/2325802&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;R语言基础1-腾讯云开发者社区-腾讯云&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://cloud.tencent.com/developer/article/2327685&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;R语言基础2-腾讯云开发者社区-腾讯云&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://cloud.tencent.com/developer/article/2328522&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;R语言基础3-腾讯云开发者社区-腾讯云&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://cloud.tencent.com/developer/article/2329457&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;R语言基础4(文件读写）-腾讯云开发者社区-腾讯云&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://cloud.tencent.com/developer/article/2330721&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;R语言基础5（绘图基础）-腾讯云开发者社区-腾讯云&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;入门学习书籍阅读推荐：
+R语言实战.pdf
+&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1uklnM0T5QLqrCPSnG6Lo2g?pwd=7lkd&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;链接&lt;/a&gt;
+提取码：7lkd&lt;/p&gt;
+&lt;p&gt;2、基于TCGA及GEO数据库的基因表达分析全部流程：
+&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/Eric_blog/article/details/104580174&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GEO数据挖掘全流程分析&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/Eric_blog/article/details/104989695&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;TCGA数据库下载及全流程分析（更新中）&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://cloud.tencent.com/developer/article/2332857&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;表达芯片数据分析1-腾讯云开发者社区-腾讯云&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://cloud.tencent.com/developer/article/2333690&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;表达芯片数据分析2-腾讯云开发者社区-腾讯云&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://cloud.tencent.com/developer/article/2334910&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;表达芯片数据分析3——基因差异分析绘制火山图及差异基因热图-腾讯云开发者社区-腾讯云&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://cloud.tencent.com/developer/article/2335340&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;表达芯片数据分析4——复杂数据及其分析（多分组数据）-腾讯云开发者社区-腾讯云&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://cloud.tencent.com/developer/article/2335342&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;表达芯片数据分析5——多组数据联合分析-腾讯云开发者社区-腾讯云&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;最新更新于 2024.10.22&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>蛋白质与DNA互作研究——Cut&amp;Tag技术</title>
         <link>https://jianxiongchen-cloud.github.io/cjx.github.io/p/%E8%9B%8B%E7%99%BD%E8%B4%A8%E4%B8%8Edna%E4%BA%92%E4%BD%9C%E7%A0%94%E7%A9%B6cuttag%E6%8A%80%E6%9C%AF/</link>
         <pubDate>Tue, 22 Oct 2024 00:00:00 +0000</pubDate>
         
         <guid>https://jianxiongchen-cloud.github.io/cjx.github.io/p/%E8%9B%8B%E7%99%BD%E8%B4%A8%E4%B8%8Edna%E4%BA%92%E4%BD%9C%E7%A0%94%E7%A9%B6cuttag%E6%8A%80%E6%9C%AF/</guid>
-        <description>&lt;img src="https://jianxiongchen-cloud.github.io/cjx.github.io/p/%E8%9B%8B%E7%99%BD%E8%B4%A8%E4%B8%8Edna%E4%BA%92%E4%BD%9C%E7%A0%94%E7%A9%B6cuttag%E6%8A%80%E6%9C%AF/pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg" alt="Featured image of post 蛋白质与DNA互作研究——Cut&amp;Tag技术" /&gt;&lt;h1 id=&#34;蛋白质与dna互作研究cuttag技术&#34;&gt;蛋白质与DNA互作研究——Cut&amp;amp;Tag技术
+        <description>&lt;img src="https://jianxiongchen-cloud.github.io/cjx.github.io/p/%E8%9B%8B%E7%99%BD%E8%B4%A8%E4%B8%8Edna%E4%BA%92%E4%BD%9C%E7%A0%94%E7%A9%B6cuttag%E6%8A%80%E6%9C%AF/1729597708526.jpg" alt="Featured image of post 蛋白质与DNA互作研究——Cut&amp;Tag技术" /&gt;&lt;h1 id=&#34;蛋白质与dna互作研究cuttag技术&#34;&gt;蛋白质与DNA互作研究——Cut&amp;amp;Tag技术
 &lt;/h1&gt;&lt;p&gt;表观遗传学研究基因的核苷酸序列不发生改变的情况下，但是基因序列/ 组蛋白等发生了修饰或修饰发生了改变，导致基因表达发生可遗传改变的现象。&lt;/p&gt;
 &lt;p&gt;传统的研究蛋白质与DNA相互作用的方法叫做染色质免疫共沉淀技术（ChIP）。&lt;strong&gt;ChIP-Seq&lt;/strong&gt;的基本实验流程过程包括：甲醛交联将DNA结合蛋白和DNA紧密固定；然后抽提染色质，超声破碎DNA断裂，片段范围在200-500bp之间；抗体孵育结合靶转录因子，Protein A/G磁珠拉取抗体-蛋白-DNA复合物；蛋白消化后再通过PCR、芯片或者二代测序对DNA序列进行鉴定。对富集到的DNA 片段进行高通量测序，即可得到可能和目的蛋白结合的DNA片段。&lt;/p&gt;
 &lt;p&gt;但是CHIP有以下一些缺点：1）步骤多且复杂，甲醛交联、超声打断、免疫共沉淀、文库构建；2）起始细胞量大，至少需要107个细胞；3）背景噪音高，非特异结合的假阳性数据多，必须有对照组；4）重复性差，多次重复不能得到一致性数据；5）抗体依赖性高，需要ChIP 级别抗体。&lt;/p&gt;
@@ -216,25 +282,80 @@ Proteinase K（此时磁珠会板结）（若样品较多，可一起提前配�
 &lt;p&gt;&lt;strong&gt;5&lt;/strong&gt; &lt;strong&gt;文库扩增&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;添加 EDTA 终止标签化，并用 SDS 和蛋白酶 K 裂解细胞核。然后可以通过多种方式清除 DNA 片段，原实验方案建议先用苯酚/氯仿/异戊醇提取这些片段，再用乙醇进行沉淀。您也可以使用 AMPure 磁珠来清除 DNA 片段。建议在沉淀步骤中避免使用任何载体，例如糖原，因为载体会降低后续 PCR 反应的效率。&lt;/p&gt;
 &lt;p&gt;1）将下面的试剂解冻后颠倒混匀，瞬离后置于冰上备用。于无菌PCR 管中配制反应体系。&lt;/p&gt;
-&lt;p&gt;| 试剂 | 体积|
-| &amp;mdash; | &amp;mdash; | |
-| 步骤3.5纯化产物 |20uL  |&lt;br&gt;
-| PCR primer Mix |3uL  |&lt;br&gt;
-|N5XX  |1uL  |&lt;br&gt;
-| N7XX | 1uL|&lt;br&gt;
-|2X Ultima amplication mix  |25uL  |&lt;br&gt;
-|ddH2O  |  to 50 uL|&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;试剂&lt;/th&gt;
+          &lt;th&gt;体积&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;步骤3.5纯化产物&lt;/td&gt;
+          &lt;td&gt;20uL&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;PCR primer Mix&lt;/td&gt;
+          &lt;td&gt;3uL&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;N5XX&lt;/td&gt;
+          &lt;td&gt;1uL&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;N7XX&lt;/td&gt;
+          &lt;td&gt;1uL&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;2X Ultima amplication mix&lt;/td&gt;
+          &lt;td&gt;25uL&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;ddH2O&lt;/td&gt;
+          &lt;td&gt;to 50 uL&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 &lt;p&gt;2）使用移液器轻轻吹打或振荡混匀，并短暂离心将反应液收集至管底。
 3）将PCR 管置于PCR 仪中，设置表5 所示反应程序，进行PCR 扩增（循环数14）。&lt;/p&gt;
-&lt;p&gt;| 反应温度 |时间|
-| &amp;mdash; | &amp;mdash; | |
-| 热盖105° |on  |&lt;br&gt;
-| 72℃ |3 min  |&lt;br&gt;
-| 95℃ |3 min  |&lt;br&gt;
-| 98℃ |10 sec 循环 |&lt;br&gt;
-| 60℃ |15 sec 循环 |&lt;br&gt;
-| 72℃ |1 min |&lt;br&gt;
-|4℃  |  Hold |&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;反应温度&lt;/th&gt;
+          &lt;th&gt;时间&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;热盖105°&lt;/td&gt;
+          &lt;td&gt;on&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;72℃&lt;/td&gt;
+          &lt;td&gt;3 min&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;95℃&lt;/td&gt;
+          &lt;td&gt;3 min&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;98℃&lt;/td&gt;
+          &lt;td&gt;10 sec 循环&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;60℃&lt;/td&gt;
+          &lt;td&gt;15 sec 循环&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;72℃&lt;/td&gt;
+          &lt;td&gt;1 min&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;4℃&lt;/td&gt;
+          &lt;td&gt;Hold&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 &lt;p&gt;&lt;strong&gt;6&lt;/strong&gt; &lt;strong&gt;文库纯化（1.2X）&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;1）将平衡至室温的DNA Selection Beads 磁珠，振荡或上下颠倒混匀。
 2）吸取60 μL（1.2×）DNA Selection Beads 至步骤3.6 的PCR 反应产物中，涡旋混匀或用移液器吹打混匀10 次，室温静置孵育5 min。
@@ -279,8 +400,8 @@ Proteinase K（此时磁珠会板结）（若样品较多，可一起提前配�
     &gt;Super-enhancer landscape reveals leukemia stem cell reliance on X-box binding protein 1 as a therapeutic vulnerability &lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;慢性粒细胞白血病（CML）患者的复发可能至少部分是因为白血病干细胞（LSCs）对酪氨酸激酶抑制剂（TKIs）如伊马替尼缺乏敏感性。LSC干性的精确调控尚不完全清楚。鉴于LSCs的特征受表观遗传调控，我们假设LSCs可能依赖于与超增强子（SE）相关的基因的持续主动转录，这反过来可能暗示了干预的机会。在这项研究中，作者检验了这一假设，并描绘了CML患者LSCs中的SE景观。细胞周期蛋白依赖性激酶7（CDK7）抑制剂THZ1对SE相关基因转录的破坏，有效地根除了逆转录病毒BCR-ABL驱动的CML小鼠中的LSCs，同时保留了正常的造血干细胞。此外，作者发现X-box结合蛋白1（XBP1）是未折叠蛋白反应途径中mRNA剪接内切酶IRE1α的底物，是LSCs中SE相关的癌基因。XBP1的敲除降低了原代CML CD34+细胞的存活率和自我更新能力，并根除了CML小鼠的LSCs。通过造血细胞特异性Ire1条件敲除选择性阻断Xbp1剪接形式的产生，抑制了CML的进展，并损害了CML小鼠中LSCs的白血病发生。&lt;/p&gt;
 &lt;h2 id=&#34;注意事项&#34;&gt;注意事项
-&lt;/h2&gt;&lt;p&gt;1、&lt;strong&gt;一个好的抗体是CUT&amp;amp;Tag成功的前提！&lt;/strong&gt; 抗体要能识别天然构象蛋白且特异性强，最好选用文献验证过的抗体，实验前并进行IP验证。如果实在没有合适的抗体，可以选择标签蛋白，如FLAG和HA等经过有效验证的单克隆抗体。优先选用ChIP/ChIP-seq级别的候选抗体；ChIP级别抗体优于非ChIP级别抗体；文献验证过的抗体优于非文献验证过的抗体。&lt;strong&gt;ChIP级别抗体&lt;/strong&gt;对抗体纯度、特异性结合的要求都比较高，是完成CUT&amp;amp;Tag实验的首选抗体。如果没有找到目的基因的ChIP-seq级别的抗体，通过ChIP和IP验证的抗体也可以使用，但是尽量不要使用没有标注ChIP应用的抗体，或者标注未检测的抗体，否则实验效果可能不太理想。
-2、&lt;strong&gt;阴性对照设置&lt;/strong&gt;  阴性对照使用与一抗相同种属的IgG 或者是不添加一抗的二抗。阴性对照证明抗体特异，实验结果可信。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;1、&lt;strong&gt;一个好的抗体是CUT&amp;amp;Tag成功的前提！&lt;/strong&gt; 抗体要能识别天然构象蛋白且特异性强，最好选用文献验证过的抗体，实验前并进行IP验证。如果实在没有合适的抗体，可以选择标签蛋白，如FLAG和HA等经过有效验证的单克隆抗体。优先选用ChIP/ChIP-seq级别的候选抗体；ChIP级别抗体优于非ChIP级别抗体；文献验证过的抗体优于非文献验证过的抗体。&lt;strong&gt;ChIP级别抗体&lt;/strong&gt;对抗体纯度、特异性结合的要求都比较高，是完成CUT&amp;amp;Tag实验的首选抗体。如果没有找到目的基因的ChIP-seq级别的抗体，通过ChIP和IP验证的抗体也可以使用，但是尽量不要使用没有标注ChIP应用的抗体，或者标注未检测的抗体，否则实验效果可能不太理想。&lt;/p&gt;
+&lt;p&gt;2、&lt;strong&gt;阴性对照设置&lt;/strong&gt;  阴性对照使用与一抗相同种属的IgG 或者是不添加一抗的二抗。阴性对照证明抗体特异，实验结果可信。&lt;/p&gt;
 </description>
         </item>
         <item>

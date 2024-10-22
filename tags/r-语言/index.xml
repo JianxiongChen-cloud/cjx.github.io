@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>R 语言 on Jianxiong Chen</title>
+        <link>https://jianxiongchen-cloud.github.io/cjx.github.io/tags/r-%E8%AF%AD%E8%A8%80/</link>
+        <description>Recent content in R 语言 on Jianxiong Chen</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en</language>
+        <copyright>Jianxiong Chen</copyright>
+        <lastBuildDate>Tue, 22 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://jianxiongchen-cloud.github.io/cjx.github.io/tags/r-%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>基因差异表达分析</title>
+        <link>https://jianxiongchen-cloud.github.io/cjx.github.io/p/%E5%9F%BA%E5%9B%A0%E5%B7%AE%E5%BC%82%E8%A1%A8%E8%BE%BE%E5%88%86%E6%9E%90/</link>
+        <pubDate>Tue, 22 Oct 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://jianxiongchen-cloud.github.io/cjx.github.io/p/%E5%9F%BA%E5%9B%A0%E5%B7%AE%E5%BC%82%E8%A1%A8%E8%BE%BE%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;img src="https://jianxiongchen-cloud.github.io/cjx.github.io/p/%E5%9F%BA%E5%9B%A0%E5%B7%AE%E5%BC%82%E8%A1%A8%E8%BE%BE%E5%88%86%E6%9E%90/1729597834517.jpg" alt="Featured image of post 基因差异表达分析" /&gt;&lt;h1 id=&#34;基因差异表达分析&#34;&gt;基因差异表达分析
+&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id=&#34;差异表达分析理论&#34;&gt;差异表达分析理论
+&lt;/h2&gt;&lt;p&gt;基于RNA-seq的差异表达分析&lt;a class=&#34;link&#34; href=&#34;https://blingarida.github.io/2019/10/10/Differential%20expression%20analysis/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Differential expression analysis&lt;/a&gt;的背景及标准流程。&lt;/p&gt;
+&lt;h2 id=&#34;基于在线网站的分析&#34;&gt;基于在线网站的分析
+&lt;/h2&gt;&lt;h3 id=&#34;tcga数据库&#34;&gt;TCGA数据库
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;简介&lt;/strong&gt;：TCGA数据库全称为The Cancer Genome Atlas，主要储存关于各类肿瘤的一个基本信息，包括RNAseq，miRNAseq，DNA甲基化，CNV，SNP等信息，它是目前为止可以获得的公开数据库里面数据相对全面的一个，在各个领域得到了广泛的应用，为肿瘤基础医学和转化医学研究者提供了海量的基因组数据和与其关联的临床数据,这为挖掘有意义的基因组变化和发现影响肿瘤起始、发展、分化、转移等生物学机制提供了海量数据基础。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;在线分析网站&lt;/strong&gt;：
+cBioportal(&lt;a class=&#34;link&#34; href=&#34;https://www.cbioportal.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;cBioPortal for Cancer Genomics&lt;/a&gt;)
+GEPIA2(&lt;a class=&#34;link&#34; href=&#34;http://gepia2.cancer-pku.cn/#index&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GEPIA 2&lt;/a&gt;)&lt;/p&gt;
+&lt;h3 id=&#34;geo数据库&#34;&gt;GEO数据库
+&lt;/h3&gt;&lt;p&gt;1、GEO数据库介绍及检索：
+&lt;a class=&#34;link&#34; href=&#34;https://www.dxy.cn/bbs/newweb/pc/post/41987780&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GEO数据库&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;2、GEO2R在线分析差异表达基因&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1pG4y1r7vx/?vd_source=091cd6aed0a9811f8b13926e6c46c60b&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GEO数据库介绍（四）：GEO2R在线分析筛选差异基因_哔哩哔哩_bilibili&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;利用r语言进行生信分析&#34;&gt;利用R语言进行生信分析
+&lt;/h2&gt;&lt;h3 id=&#34;r语言基础及学习教程&#34;&gt;R语言基础及学习教程
+&lt;/h3&gt;&lt;p&gt;1、R语言学习
+学习视频可以参考生信技能树相关视频：&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1cs411j75B/?spm_id_from=333.337.search-card.all.click&amp;amp;vd_source=091cd6aed0a9811f8b13926e6c46c60b&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【生信技能树】生信人应该这样学R语言_哔哩哔哩_bilibili&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;R语言基础知识可参考：
+&lt;a class=&#34;link&#34; href=&#34;https://cloud.tencent.com/developer/article/2325802&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;R语言基础1-腾讯云开发者社区-腾讯云&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://cloud.tencent.com/developer/article/2327685&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;R语言基础2-腾讯云开发者社区-腾讯云&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://cloud.tencent.com/developer/article/2328522&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;R语言基础3-腾讯云开发者社区-腾讯云&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://cloud.tencent.com/developer/article/2329457&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;R语言基础4(文件读写）-腾讯云开发者社区-腾讯云&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://cloud.tencent.com/developer/article/2330721&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;R语言基础5（绘图基础）-腾讯云开发者社区-腾讯云&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;入门学习书籍阅读推荐：
+R语言实战.pdf
+&lt;a class=&#34;link&#34; href=&#34;https://pan.baidu.com/s/1uklnM0T5QLqrCPSnG6Lo2g?pwd=7lkd&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;链接&lt;/a&gt;
+提取码：7lkd&lt;/p&gt;
+&lt;p&gt;2、基于TCGA及GEO数据库的基因表达分析全部流程：
+&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/Eric_blog/article/details/104580174&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GEO数据挖掘全流程分析&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/Eric_blog/article/details/104989695&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;TCGA数据库下载及全流程分析（更新中）&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://cloud.tencent.com/developer/article/2332857&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;表达芯片数据分析1-腾讯云开发者社区-腾讯云&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://cloud.tencent.com/developer/article/2333690&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;表达芯片数据分析2-腾讯云开发者社区-腾讯云&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://cloud.tencent.com/developer/article/2334910&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;表达芯片数据分析3——基因差异分析绘制火山图及差异基因热图-腾讯云开发者社区-腾讯云&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://cloud.tencent.com/developer/article/2335340&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;表达芯片数据分析4——复杂数据及其分析（多分组数据）-腾讯云开发者社区-腾讯云&lt;/a&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://cloud.tencent.com/developer/article/2335342&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;表达芯片数据分析5——多组数据联合分析-腾讯云开发者社区-腾讯云&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;最新更新于 2024.10.22&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
