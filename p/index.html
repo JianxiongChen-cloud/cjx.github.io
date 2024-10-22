@@ -290,27 +290,18 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#一cuttag技术的发展">一、Cut&amp;Tag技术的发展</a></li>
-    <li><a href="#二cutrun技术原理与方法">二、Cut&amp;Run技术原理与方法</a></li>
-    <li><a href="#三cuttag原理及方法介绍">三、Cut&amp;Tag原理及方法介绍</a>
+    <li><a href="#差异表达分析理论">差异表达分析理论</a></li>
+    <li><a href="#基于在线网站的分析">基于在线网站的分析</a>
       <ol>
-        <li>
-          <ol>
-            <li><a href="#1基本原理">1、基本原理</a></li>
-            <li><a href="#2cuttag与cutrun的比较">2、Cut&amp;Tag与Cut&amp;Run的比较</a></li>
-            <li><a href="#3操作方法">3、操作方法</a></li>
-          </ol>
-        </li>
+        <li><a href="#tcga数据库">TCGA数据库</a></li>
+        <li><a href="#geo数据库">GEO数据库</a></li>
       </ol>
     </li>
-    <li><a href="#应用案例">应用案例</a>
+    <li><a href="#利用r语言进行生信分析">利用R语言进行生信分析</a>
       <ol>
-        <li><a href="#1g四链体dna的识别">1、G四链体DNA的识别</a></li>
-        <li><a href="#2组蛋白h3k9乳酰化通过luc7l2介导的mlh1内含子保留在胶质母细胞瘤中赋予替莫唑胺抗性">2、组蛋白H3K9乳酰化通过LUC7L2介导的MLH1内含子保留在胶质母细胞瘤中赋予替莫唑胺抗性</a></li>
-        <li><a href="#3超级增强子景观揭示了白血病干细胞对x-box结合蛋白1的依赖是一种治疗靶点">3、超级增强子景观揭示了白血病干细胞对X-box结合蛋白1的依赖是一种治疗靶点</a></li>
+        <li><a href="#r语言基础及学习教程">R语言基础及学习教程</a></li>
       </ol>
     </li>
-    <li><a href="#注意事项">注意事项</a></li>
   </ol>
 </nav>
         </div>
@@ -369,274 +360,64 @@
     <section class="article-content">
     
     
-    <h1 id="-蛋白质与dna互作研究cuttag技术"># 蛋白质与DNA互作研究——Cut&amp;Tag技术
-</h1><p>表观遗传学研究基因的核苷酸序列不发生改变的情况下，但是基因序列/ 组蛋白等发生了修饰或修饰发生了改变，导致基因表达发生可遗传改变的现象。</p>
-<p>传统的研究蛋白质与DNA相互作用的方法叫做染色质免疫共沉淀技术（ChIP）。<strong>ChIP-Seq</strong>的基本实验流程过程包括：甲醛交联将DNA结合蛋白和DNA紧密固定；然后抽提染色质，超声破碎DNA断裂，片段范围在200-500bp之间；抗体孵育结合靶转录因子，Protein A/G磁珠拉取抗体-蛋白-DNA复合物；蛋白消化后再通过PCR、芯片或者二代测序对DNA序列进行鉴定。对富集到的DNA 片段进行高通量测序，即可得到可能和目的蛋白结合的DNA片段。</p>
-<p>但是CHIP有以下一些缺点：1）步骤多且复杂，甲醛交联、超声打断、免疫共沉淀、文库构建；2）起始细胞量大，至少需要107个细胞；3）背景噪音高，非特异结合的假阳性数据多，必须有对照组；4）重复性差，多次重复不能得到一致性数据；5）抗体依赖性高，需要ChIP 级别抗体。</p>
-<h2 id="一cuttag技术的发展">一、Cut&amp;Tag技术的发展
-</h2><p>2017年，Steven Henikoff在Elife 上发表CUT&amp;RUN技术：运用了ConA beads结合细胞核，pA MNase靶向切割染色质。</p>
-<p>2018年，Nature Protocols进一步改进：非离子去污剂洋地黄皂苷（digitonindigitonin）对细胞膜进行“打孔”从而可以无需提前分离细胞核。</p>
-<p>2019年，合成pAG MnaseMnase，增加抗体通用性；消化条件优化为“高钙低盐”，可阻止染色质提前释放。</p>
-<p>2019年，弗雷德哈钦森癌症研究中心的Henikoff博士在Nature Communication公开了CUT&amp;tag技术的详细结果与实验方案。（原文：<a class="link" href="https://pubmed.ncbi.nlm.nih.gov/31036827/"  target="_blank" rel="noopener"
-    >CUT&amp;Tag for efficient epigenomic profiling of small samples and single cells</a>）CUT&amp;tag 技术，利用Tn5 转座酶同时具有切割和连接两种活性，直接加上接头，不需要额外建库即无需进行末端修复、连接接头等，可以更少细胞单细胞上进行。为证明Cut&amp;Tag技术的有效性，Henikoff 博士在对组蛋白H3K27me3进行研究时对比使用了ChIP-seq、Cut&amp;RUN、Cut&amp;Tag三种方法。从不同角度对三组数据进行比较后，发现Cut&amp;Tag技术具有显著优势。主要包括：
-1）更好的信噪比和更低的背景；
-2）识别染色质特征时最高效；
-3）重复性好，灵敏度高；
-4）能对极少量细胞甚至单细胞进行分析。</p>
-<h2 id="二cutrun技术原理与方法">二、Cut&amp;Run技术原理与方法
-</h2><p><strong>Cut&amp;Run</strong>（Cleavage Under Targets and Release Using Nuclease）是一种用于高分辨率研究蛋白质与DNA相互作用的技术。它结合了染色质免疫沉淀（ChIP）和微球菌核酸酶消化的各个方面。在Cut&amp;Run中，特异性抗体用于与活细胞或固定细胞中的靶蛋白（如转录因子）结合。然后，招募核酸酶（通常是与核酸酶融合的蛋白质A或G）来切割蛋白质-DNA复合物附近的DNA。这导致短DNA片段的释放，然后进行纯化和测序。与传统的ChIP-seq方法相比，Cut&amp;Run通常因其灵敏度和较低的背景噪声而受到青睐。它有助于定位结合位点和理解基因调控。</p>
-<p>通常包括以下步骤：</p>
-<p>1.<strong>细胞制备</strong>：收获细胞，将其悬浮并固定以保存蛋白质与DNA的相互作用。</p>
-<p>2.<strong>抗体结合</strong>：将针对靶蛋白的特异性抗体加入细胞悬浮液中，使其能够结合各自的蛋白质。</p>
-<p>3.<strong>核酸酶招募</strong>：加入核酸酶（通常与蛋白质A或G融合），与抗体结合并切割蛋白质-DNA复合物附近的DNA。</p>
-<p>4.<strong>消化和释放</strong>：核酸酶切割DNA，导致与靶蛋白相关的小的、可接近的DNA片段的释放。</p>
-<p>5.<strong>钟止反应</strong>：通常通过加入终止核酸酶活性的停止缓冲液来停止反应。</p>
-<p>6.<strong>DNA纯化</strong>：纯化释放的DNA片段以去除任何未结合的物质。</p>
-<p>7.<strong>文库制备</strong>：然后通常通过文库制备方案对纯化的DNA进行测序处理。</p>
-<p>8.<strong>测序和分析</strong>：最后，对制备的DNA文库进行测序，并使用生物信息学工具分析数据以确定结合位点和其他相互作用。</p>
-<p>这种方法对蛋白质-DNA相互作用进行高分辨率绘图，同时最大限度地减少背景噪声。</p>
-<h2 id="三cuttag原理及方法介绍">三、Cut&amp;Tag原理及方法介绍
-</h2><h4 id="1基本原理">1、基本原理
-</h4><p>CUT&amp;Tag（Cleavage Under Targets and TagmentationTagmentation）研究组蛋白修饰图谱的新技术方法，可捕捉细胞原始状态下的表观遗传学状态。ProteinA/G-Tn5是Protein A蛋白与Tn5转座酶的融合蛋白，当抗体结合目的蛋白（如转录因子、组蛋白等）后，Protein A蛋白可直接结合抗体，其融合的Tn5转座酶可特异性的切割目的蛋白附近的DNA片段，并将DNA片段连上接头，文库构建之后可进行高通量测序。</p>
-<p>附：<a class="link" href="https://blog.csdn.net/jiangshandaiyou/article/details/124125322"  target="_blank" rel="noopener"
-    >Tn5转座酶建库原理-CSDN博客</a></p>
-<h4 id="2cuttag与cutrun的比较">2、Cut&amp;Tag与Cut&amp;Run的比较
-</h4><p><strong>ChIP seq，CUT&amp;RUN，CUT&amp;Tag</strong></p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th></th>
-          <th><strong>ChIP-seq</strong></th>
-          <th><strong>CUT&amp;RUN</strong></th>
-          <th><strong>CUT&amp;Tag</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>起始材料</td>
-          <td>标准实验方案需要上百万个细胞，也有一些关于低 input 方案的报道</td>
-          <td>不超过 500,000 个细胞，标准情况下需要 50,000 个细胞。可使用低 input 和单细胞实验方案，支持自动化。</td>
-          <td>不超过 500,000 个细胞，标准情况下需要 50,000 个细胞。可使用低 input 和单细胞实验方案，支持自动化。</td>
-      </tr>
-      <tr>
-          <td>固定</td>
-          <td>一般采用福尔马林交联实验方案，有时采用 DSG 和福尔马林进行双重固定</td>
-          <td>不需要或者不推荐固定</td>
-          <td>不需要或者不推荐固定</td>
-      </tr>
-      <tr>
-          <td>核分离</td>
-          <td>大多数实验方案推荐进行核分离</td>
-          <td>不需要，但可以进行核分离</td>
-          <td>不需要，但可以进行核分离</td>
-      </tr>
-      <tr>
-          <td>超声处理</td>
-          <td>在大多数交联实验方案中使用，以切割和溶解染色质</td>
-          <td>不需要</td>
-          <td>不需要</td>
-      </tr>
-      <tr>
-          <td>裂解</td>
-          <td>发生在基于抗体的免疫沉淀之前</td>
-          <td>发生在使用 MNase 进行抗体引导的 DNA 片段化之后</td>
-          <td>发生在使用 Tn5 进行抗体引导的 DNA 标签化之后</td>
-      </tr>
-      <tr>
-          <td>切割</td>
-          <td>常规交联实验方案不含酶切，但在天然实验方案中，需使用 MNase 在免疫沉淀前切割 DNA</td>
-          <td>使用 MNase 或特异性抗体识别的靶区域进行<em>原位</em> DNA 片段化</td>
-          <td>使用 Tn5 或特异性抗体识别的靶区域进行<em>原位</em> DNA 标签化</td>
-      </tr>
-      <tr>
-          <td>实验方案耗时</td>
-          <td>约 1 周</td>
-          <td>通常 1-2 天</td>
-          <td>通常 1-2 天</td>
-      </tr>
-      <tr>
-          <td>二抗</td>
-          <td>一般不使用</td>
-          <td>一般不使用，除非是对于低丰度靶点表位</td>
-          <td>一般用作特异性抗体和蛋白 A-Tn5 融合蛋白之间的桥接抗体</td>
-      </tr>
-      <tr>
-          <td>测序文库制备</td>
-          <td>对于末端修复和接头连接实验方案，有必要</td>
-          <td>对于低 DNA 样本 input 的末端修复和接头连接实验方案，有必要</td>
-          <td>由于通过使用过的 Tn5 进行了接头连接，因此需要进行一次 PCR 扩增</td>
-      </tr>
-      <tr>
-          <td>测序深度</td>
-          <td>约 2000 万个读段</td>
-          <td>约 800 万个读段</td>
-          <td>约 200 万个读段</td>
-      </tr>
-      <tr>
-          <td>费用</td>
-          <td>单个样本的成本相对较高</td>
-          <td>单个样本的成本低</td>
-          <td>单个样本的成本低</td>
-      </tr>
-  </tbody>
-</table></div>
-<h4 id="3操作方法">3、操作方法
-</h4><p>以Hieff NGS®In-Situ DNABinding Profiling Library Prep Kit for Illumina®V2 CUT&amp;Tag试剂盒（pA/G-Tn5版）为例</p>
-<p>本试剂盒包含两个独立模块：BOX-I和BOX-II。BOX-I包含结合细胞的ConA Beads、提取DNA 的DNA Extract Beads以及文库纯化的DNA Selection Beads，BOX-II包含细胞透化剂、抗体结合buffer、转座酶结合buffer、蛋白酶K以及后续文库扩增所需的所有试剂。此外，本试剂盒已在不同种类细胞（如293T、K562、CHO、ESC细胞等）中进行了验证，均具有良好的建库效率和建库产量。本试剂盒提供的所有试剂都经过严格的质量控制和功能验证，最大程度上保证了文库的稳定性和重复性。</p>
-<p>PCR产物因操作不当极容易产生气溶胶污染，进而影响实验结果准确性。推荐将PCR反应体系配制区和PCR产物纯化检测区进行强制性的物理隔离、配备文库构建专用移液器等设备以及定时对各实验区域进行清洁（推荐使用ThermoFisher公司的DNAZapTM高效核酸去除喷雾），以保证实验环境的洁净度。</p>
-<p><strong>操作前准备</strong></p>
-<p>ConA beads使用前将磁珠平衡至室温，请勿将磁珠置于0℃以下存放。DNA Extract Beads及DNA Selection Beads操使用前应先平衡至室温，否则会导致得率下降、分选效果不佳。请勿将磁珠置于0℃以下存放。磁珠每次使用前都应充分振荡混匀或使用移液器上下吹打充分混匀。</p>
-<p>准备材料：
-1、抗体：靶蛋白的一抗和相对应的二抗（本试剂盒提供抗兔的二抗，若需要抗鼠二抗，推荐使用Yeasencat#34851ES或其他等效产品）。
-2、其他材料：无水乙醇、无菌超纯水、低吸附枪头、PCR管、磁力架、PCR仪等。
-3、Hieff NGS® TagmentIndexKitfor Illumina®（Cat#12416ES）或其他替代引物。</p>
-<p>准备细胞：
-1、在室温条件下收集细胞并计数，死亡的细胞染色质松散，暴露出大量的裸DNA，转座酶复合物随机切割会造成比较强的噪音信号，建议样本细胞活性不低于80%(细胞活性可以用台盼蓝染色来鉴定)。
-2、贴壁较紧的细胞如Hela细胞等可用Accutase或者Trypsin部分消化获得。
-3、对于一些转录因子及表达丰度较低的目的蛋白，可以对细胞及细胞核进行轻度交联，以获得更好的实验效果。组蛋白研究时无需交联。</p>
-<p>准备溶液配制：
-提前配置BF1、BF2 和BF3 溶液。
-1、BF1：
-单个样本：900 μL Cell wash buffe+9 μL Protease Inhibitor Cocktail ( EDTA-free) ;
-2、BF2：
-单个样本：250 μL BF1+ 2.5 μL 5% Digitonin；
-3、BF3：
-单个样本：400 μL BF1+0.8 μL 5% Digitonin +20 μL 3M NaCl；
-4. BF4：
-实验组BF4+：48.5 μL BF2+ 1 μL 50× Protein blocker +0.5 μL 一抗
-阴性对照组BF4-：取49 μL BF2，加入1 μL 50× Protein blocker（未加一抗）</p>
-<p><strong>1.</strong> <strong>细胞收集与样品预处理</strong>
-细胞可选用有活性的细胞或者将组织解离到细胞状态或细胞核状态。CUT&amp;Tag 通常使用未固定的新鲜样本作；也可以使用冷冻样本。还可使用提取细胞核后经福尔马林轻微固定（0.1% 甲醛室温固定2 5min）的样本。固定步骤可以降低执行实验方案期间细胞核聚集在一起的可能性。或者使用由含 Triton X-100 的缓冲液产生的固定和冷冻保存样本时，可从所有缓冲液中除去洋地黄皂苷，这样可以进一步减少磁珠结块。但是，需要注意，在某些情况下，表位固定会干扰抗体的结合。</p>
-<p>通常可用100-100万个细胞（哺乳动物），最佳选用20万个细胞。细胞活性要求大于80%，细胞核完整性要求大于80%（台盼蓝染色判断）。具体步骤如下：
-<strong>细胞准备</strong>
-1）细胞收集于1.5mL 离心管，300g 离心3min，弃上清，加入1mL PBS 缓冲液，吹打混匀后取少量检测细胞活力，300g 离心3min，弃上清；
-2）PBS重悬，计数10万个细胞加入1.5mL 离心管，室温600 × g 离心5 min，吸净管内溶液；
-3）加入140 μL BF1，轻轻吹打重悬，室温600 × g 离心5 min，吸净管内溶液；
-4）加入90 μL BF1，轻轻吹打重悬，转移至PCR 管中。
-<strong>磁珠活化</strong>
-1）取10 μL Con A Beads 于已预加40 μL ConA bind buffer 的PCR 管中吹吸混匀，静置于磁力架至磁珠贴壁，吸净管内溶液；
-2）取下PCR 管，加入50 μL ConA bind buffer，吹吸混匀，静置于磁力架至磁珠贴壁，吸净管内溶液；
-c）再次取下PCR 管，加入10 μL ConA bind buffer，吹吸混匀。
-<strong>磁珠捕获细胞</strong>
-将重悬在ConA bind buffer 中的ConA beads 轻轻滴加在细胞悬液中，颠倒5 次混匀后，将PCR 管置于旋转仪上混匀5-10 min。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Q：为什么ConA beads可以捕获细胞？
-</span></span><span class="line"><span class="cl">A：伴刀豆球蛋白A磁珠是表面共价偶联了伴刀豆球蛋白 A（ConA）的超顺磁性聚合物微球，具有单分散和磁反应性强等特点。ConA磁珠在Ca2+和Mg2+存在的情况下，通过伴刀豆球蛋白 A与末端α-D-甘露糖基和α-D-葡萄糖基的亲和作用，快速高效地分离纯化多糖、糖蛋白和糖脂等生物分子，而且使用ConA磁珠分离或固定细胞非常便捷，并在后续清洗过程中最大程度减少细胞丢失，也可以用于收集和固定细胞核。ConA磁珠能与细胞膜上的糖蛋白结合，从而吸附细胞，使对细胞的实验操作可视化，减少在后续实验过程中的细胞的损失。不建议使用离心法代替ConA beadsbeads，因为离心法不适合于低细胞数，在洗涤的过程中，损失很大。
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>2.</strong> <strong>抗体结合</strong>
-细胞与一抗孵育的同时，pA/G Tn5 与二抗孵育；然后细胞 一抗复合物与pA/G Tn5 二抗复合物共孵育，保证二抗识别一抗。</p>
-<p>对结合至伴刀豆球蛋白 A 磁珠的细胞核进行通透处理，同时在含洋地黄皂苷的缓冲液中与靶向目的蛋白的抗体（一抗）一起孵育。该步骤的持续时间可以调整，最短 2 小时，最长 5 天。抗体的推荐稀释度通常在 1:50 至 1:100（或 0.5 µg - 1.0 µg）之间，但需优化抗体的使用量。建议加入阳性（α-H3K27me3）和阴性对照（同型对照 IgG）样本。
-一抗孵育后，用含洋地黄皂苷的洗涤缓冲液快速洗涤，然后将细胞核与二抗一起孵育，这里使用的二抗需靶向一抗，充当桥接抗体并且可以增加蛋白 A 结合位点的数量。在 CUT&amp;RUN 实验方案中，这一步骤可以省略；但在 CUT&amp;Tag 实验方案中，必须执行这一步骤，以增强信号。需要注意的是，抗体类别不同，蛋白 A 的结合效率也不同，因此需要事先检查二抗与蛋白 A 的兼容性。具体步骤如下：</p>
-<p>1）将与细胞结合好的磁珠取下，瞬离(&lt; 100 × g)，静置于磁力架至磁珠贴壁（不超过2 min），吸净管内溶液。
-2）加入50 μL BF4+/BF4-，用移液器轻轻吹打混匀。
-3）室温下旋转孵育2 h 或者<strong>4 °C 旋转孵育过夜</strong>，最好水平旋转，保证液体在管底。每隔30
-min 可轻弹底部混匀，避免磁珠聚集干结。
-4）在一抗孵育的同时，配制二抗与转座酶预孵育的mix：48.5 μL BF3 +0.5 μL 二抗+1 μL 转座酶mix（常规推荐二抗稀释比例为1：100），轻轻涡旋或轻弹底部混匀，室温下旋转孵育1.5-<strong>2h</strong>。
-5）将步骤3 中与一抗结合好的磁珠取下，瞬离(&lt; 100 × g)，静置于磁力架至磁珠贴壁（不超过2 min），吸净管内溶液。
-6）用步骤4 中的转座酶-二抗结合液（50 uL）重悬步骤5 中磁珠，室温旋转孵育0.5 h，最好水平旋转，保持液体在管底。
-7）将结合好的磁珠取下，瞬离（&lt;100 × g），静置于磁力架至磁珠贴壁（不超过2 min），吸去PCR 管中全部液体。加入90 μL BF3，轻轻点动涡旋或用移液器吹打10 次，充分分离磁珠及细胞；
-8）瞬离（&lt;100 × g），静置于磁力架至磁珠贴壁（不超过2 min），吸去PCR 管中全部液体。加入90 μL BF3，轻轻点动涡旋或用移液器吹打10 次，充分分离磁珠及细胞；
-9）瞬离（&lt;100 × g），静置于磁力架至磁珠贴壁（不超过2 min），吸去PCR 管中全部液体。加入90 μL BF3，轻轻点动涡旋或用移液器吹打10 次，充分分离磁珠及细胞；总共清洗3次；立即进行下一步。</p>
-<p><strong>3</strong> <strong>转座酶激活</strong></p>
-<p>1）将磁珠瞬离（&lt;100 × g），静置于磁力架至磁珠贴壁（不超过2 min），吸净管内溶液。加入（30 μL BF3 + 1 μL 30× Activating buffer），轻轻吹打或轻弹底部混匀（若样品较多，激活缓冲液可一起提前配制）。
-2）37 °C 旋转孵育1 h，最好水平旋转，保证液体在管底。每隔30 min 轻弹底部混匀，避免磁珠聚集干结。</p>
-<p><strong>4</strong> <strong>蛋白酶K消化，基因组DNA回收</strong></p>
-<p>1）向每个样品中加入2 μL 15× Terminate Solution、1 μL DNA Spike-in mix 和1 μL 30×
-Proteinase K（此时磁珠会板结）（若样品较多，可一起提前配制）。全速涡旋样品约10 sec，混匀后瞬离，将样品置于PCR 仪，<strong>55 ºC 消化30 min</strong> (热盖不低于70 ºC)或者37 ºC 过夜。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Terminate solution：抑制Mg2+ 活性、裂解细胞、释放gDNA
-</span></span><span class="line"><span class="cl">Proteinase K：消化蛋白质，尤其是与DNA 结合的蛋白质
-</span></span><span class="line"><span class="cl">Spike in来源于大肠杆菌Lambda DNA 的三段序列，长度分别为230 bp 、250 bp 和300 bp bp，摩尔浓度比约为1：3：10。初始投入spikein 11：spikein 22：spikein 3=1：3：10，文库构建后，比例变化不大，可用于后续分析归一化；测序后spike in 数据量占比小于5% 。
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>2）短暂离心（&lt;100 × g），将PCR 管置于磁力架上静置3 min，取30 μL 上清。
-3）加入40 μL 室温下平衡的DNA Selection Beads，涡旋混匀或移液器吹打10 次混匀，室温静置孵育5 min。
-4）短暂离心（&lt;100 × g），将PCR 管置于磁力架上静置3 min，待磁珠完全贴壁后吸净管内溶液。
-5）保持PCR 管始终处于磁力架上，从另一侧加入200 μL 80％乙醇，避免直接冲刷磁珠，静置30-60 sec，吸净管内溶液。
-6）保持PCR 管始终处于磁力架上，再次加入200 μL 80％乙醇，静置30-60 s，吸净管内溶液。
-7）保持PCR 管始终处于磁力架上，开盖空气干燥至磁珠刚刚出现龟裂（不超过3 min）。
-8）从磁力架上取下PCR 管，加入21 μL ddH2O，并充分涡旋，室温静置5 min。
-9）将PCR 管短暂离心，置于磁力架上分离磁珠和液体，待溶液澄清后（约5 min），小心转移20 μL 上清至新的EP 管中，-20℃保存。</p>
-<p><strong>5</strong> <strong>文库扩增</strong></p>
-<p>添加 EDTA 终止标签化，并用 SDS 和蛋白酶 K 裂解细胞核。然后可以通过多种方式清除 DNA 片段，原实验方案建议先用苯酚/氯仿/异戊醇提取这些片段，再用乙醇进行沉淀。您也可以使用 AMPure 磁珠来清除 DNA 片段。建议在沉淀步骤中避免使用任何载体，例如糖原，因为载体会降低后续 PCR 反应的效率。</p>
-<p>1）将下面的试剂解冻后颠倒混匀，瞬离后置于冰上备用。于无菌PCR 管中配制反应体系。</p>
-<p>| 试剂 | 体积|
-| &mdash; | &mdash; | |
-| 步骤3.5纯化产物 |20uL  |<br>
-| PCR primer Mix |3uL  |<br>
-|N5XX  |1uL  |<br>
-| N7XX | 1uL|<br>
-|2X Ultima amplication mix  |25uL  |<br>
-|ddH2O  |  to 50 uL|</p>
-<p>2）使用移液器轻轻吹打或振荡混匀，并短暂离心将反应液收集至管底。
-3）将PCR 管置于PCR 仪中，设置表5 所示反应程序，进行PCR 扩增（循环数14）。</p>
-<p>| 反应温度 |时间|
-| &mdash; | &mdash; | |
-| 热盖105° |on  |<br>
-| 72℃ |3 min  |<br>
-| 95℃ |3 min  |<br>
-| 98℃ |10 sec 循环 |<br>
-| 60℃ |15 sec 循环 |<br>
-| 72℃ |1 min |<br>
-|4℃  |  Hold |</p>
-<p><strong>6</strong> <strong>文库纯化（1.2X）</strong></p>
-<p>1）将平衡至室温的DNA Selection Beads 磁珠，振荡或上下颠倒混匀。
-2）吸取60 μL（1.2×）DNA Selection Beads 至步骤3.6 的PCR 反应产物中，涡旋混匀或用移液器吹打混匀10 次，室温静置孵育5 min。
-3）短暂离心（&lt;100 × g），将离心管置于磁力架上静置3 min，待磁珠完全贴壁后吸净PCR 管中溶液。
-4）保持PCR 管始终处于磁力架上，从另一侧加入200 μL 80％乙醇，避免直接冲刷磁珠，静置30-60 sec，吸净PCR 管中溶液。
-5）保持PCR 管始终处于磁力架中，再次加入200 μL 80％乙醇，静置30-60 sec，吸净PCR 管中溶液。
-6）保持PCR 管始终处于磁力架中，开盖空气干燥至磁珠刚刚出现龟裂（不超过3 min）。
-7）从磁力架上取下PCR 管，加入102 μL ddH2O，并充分涡旋，室温静置5 min。
-8）将PCR 管短暂离心并置于磁力架上分离磁珠和液体，待溶液澄清后（约5 min），小心转移100 μL 上清至新的EP 管中。</p>
-<p><strong>7</strong> <strong>文库纯化（0.6X/0.5X）</strong></p>
-<p>进行双轮分选。
-1）加入60 μL (0.6×)室温下平衡的DNA Selection Beads，涡旋混匀或移液器吹打混匀10 次，室温静置孵育5 min。短暂离心（&lt;100 × g），将PCR 管置于磁力架上静置5 min，待溶液澄清后，小心转移上清至新的PCR 管中（残留3-5 μL，避免吸到磁珠）。
-*大于0.9X时默认吸附全基因组，此时上清中为中小片段DNA。
-2）加入50 μL (0.5×)室温下平衡的DNA Selection Beads，涡旋混匀或移液器吹打混匀10 次，室温静置孵育5 min。
-3）短暂离心（&lt;100 × g），将PCR 管置于磁力架上静置3 min，待磁珠完全贴壁后吸净PCR 管中溶液。
-4）保持PCR 管始终处于磁力架上，从另一侧加入200 μL 80％乙醇，避免直接冲刷磁珠，静置30-60 sec，吸净PCR 管中溶液。
-5）保持PCR 管始终处于磁力架上，再次加入200 μL 80％乙醇，静置30-60 sec，吸净PCR 管中溶液。
-6）保持PCR 管始终处于磁力架上，开盖空气干燥至磁珠刚刚出现龟裂（不超过3 min）。
-7） 从磁力架上取下PCR 管，加入21 μL ddH2O，并充分涡旋，室温静置5 min。
-8）将PCR 管短暂离心，置于磁力架上分离磁珠和液体，待溶液澄清后（约5 min），小心转移20 μL 上清至新的EP 管中，于-20℃保存。</p>
-<p><strong>5</strong> <strong>文库库检</strong></p>
-<p>由于 Tn5 在标签化过程中会在 DNA 片段中引入兼容序列，所以使用通用 i5 引物和带条形码的 i7 引物进行的简单 PCR 反应就可以生成测序文库，让 DNA 文库的制备变得极为快速简便。该步骤与 ATAC-seq 类似，因此可以使用 ATAC 实验方案描述的引物序列（Buenrostro et al ., 2013）。但需要根据用户的机器调整循环程序。为了确保 PCR 有效，需要进行短时间的退火操作；如使用缓慢升温循环仪，则可以省略退火步骤，因为变性和延伸之间的冷却时间较长，足以退火。如使用快速升温机器，则必须增加退火步骤。通常，建议不超过 12 到 14 个扩增循环，否则，文库的复杂性将降低，而 PCR 的重复率升高。</p>
-<p>在 PCR 扩增后，可用毛细管凝胶电泳法（例如 Bioanalyzer 或 TapeStation）对 CUT&amp;Tag 文库进行评估。CUT&amp;Tag 实验的失败通常表现在阳性对照样本中不存在核小体片段。</p>
-<p>但是，如果只在转录因子 CUT&amp;Tag 文库中观察到非常弱的信号，实验仍然可以继续，这种情况很常见。通过凝胶电泳进行评估后，可以使用 SPRI 磁珠清理并浓缩文库。可以将多个文库合并，每个文库获得约 200 万配对末端测序读段。</p>
-<p>大部分常规 ChIP-seq 数据分析工具都可以分析 CUT&amp;Tag 数据。Henikoff 实验室也专门为 CUT&amp;RUN 和 CUT&amp;Tag 数据设计了一些分析工具，例如 SEACR peak caller（Meers et al ., 2019b）。要想校准 CUT&amp;Tag 数据，可以将重组蛋白 A-Tn5 残留的<em>大肠杆菌</em> DNA 用作普通添加物。</p>
-<p>1）通过qubit 定量试剂对样本进行浓度检测；
-2）通过2% 琼脂糖凝胶电泳进行片段分布检测（150V 30min）；
-3）通过Agilent 2100 或其他等效产品对样本进行片段分布检测。</p>
-<h2 id="应用案例">应用案例
-</h2><p>Cut&amp;Tag技术应用于<strong>DNA组蛋白修饰研究</strong>（组蛋白甲基化、乙酰化及乳酸化、磷酸化等）、<strong>DNA-转录因子互作研究</strong>（探究转录因子结合位点的分布规律、转录因子之间的合作规则；基因转录调控的具体机制）、<strong>增强子/超级增强子分析</strong>（鉴定超级增强子、结合转录组测序确定所调控的靶基因）、<strong>组学验证</strong>（通过其他组学找到潜在结合的转录因子或是组蛋白修饰后进行验证）。</p>
-<h3 id="1g四链体dna的识别">1、G四链体DNA的识别
-</h3><p>文献：<a class="link" href="https://pubmed.ncbi.nlm.nih.gov/34400476/"  target="_blank" rel="noopener"
-    >Ligand-induced native G-quadruplex stabilization impairs transcription initiation</a>【Q1，IF=6.2】</p>
-<p>G-四链体（G4s）是通过鸟嘌呤自结合形成的非规范DNA二级结构，是一种暂时性结构，大量存在于即将分裂的细胞中，可参与多种生物过程，包括基因转录、DNA复制、基因组不稳定性以及端粒延长和维持（Varshney et al.2020）。基因转录是染色质松弛和单链DNA（ssDNA）暴露的驱动力，这是G4形成的先决条件。2020年8月有研究表明G-四链体的丰度和位置在癌症中有重要作用，可以作为开发诊疗方法，对抗乳腺癌的重要潜在靶点。另外也有研究表明，每种乳腺癌亚型都有不同的G-四链体模式或“景观”。确定肿瘤中G-四链体的特殊模式，有助于查明乳腺癌亚型，从而提供更具针对性的精准治疗。然而，关于G4s在转录调控中的确切作用的全基因组研究仍然缺乏。本文建立了一种敏感的G4-CUT&amp;Tag方法，用于高分辨率和特异性的天然G4s全基因组分析。</p>
-<p>作者纯化了G4结构特异性单链scFv抗体BG4（带有His标签的Flag-BG4抗体）进行了CHIP-SEQ及Cut&amp;Tag实验，发现Cut&amp;Tag实验重复性及信噪比更优。</p>
-<h3 id="2组蛋白h3k9乳酰化通过luc7l2介导的mlh1内含子保留在胶质母细胞瘤中赋予替莫唑胺抗性">2、组蛋白H3K9乳酰化通过LUC7L2介导的MLH1内含子保留在胶质母细胞瘤中赋予替莫唑胺抗性
-</h3><p>文献：<a class="link" href="https://pubmed.ncbi.nlm.nih.gov/38477507/"  target="_blank" rel="noopener"
-    >Histone H3K9 Lactylation Confers Temozolomide Resistance in Glioblastoma via LUC7L2-Mediated MLH1 Intron Retention </a></p>
-<p>替莫唑胺（TMZ）耐药性是胶质母细胞瘤（GBM）治疗的主要障碍。乳酰化是一种新型的翻译后修饰，涉及各种肿瘤。然而，乳酰化是否在GBM TMZ耐药性中起作用尚不清楚。这里发现组蛋白H3K9乳酸化（H3K9la）通过LUC7L2介导的MLH1内含子7的保留赋予GBM对TMZ的抗性。从机制上讲，乳酸化在复发性GBM组织和TMZ抗性细胞中上调，主要集中在组蛋白H3K9中。包括CUT&amp;Tag、SLAM-seq和RNA-seq在内的组合多组学分析表明，H3K9乳酸化在LUC7L2启动子中显著富集，并激活LUC7L2转录以促进其表达。LUC7L2介导MLH1内含子7的保留，以减少MLH1的表达，从而抑制错配修复（MMR），最终导致GBM-TMZ抗性。</p>
-<h3 id="3超级增强子景观揭示了白血病干细胞对x-box结合蛋白1的依赖是一种治疗靶点">3、超级增强子景观揭示了白血病干细胞对X-box结合蛋白1的依赖是一种治疗靶点
-</h3><p>文献：<a class="link" href="https://pubmed.ncbi.nlm.nih.gov/34550724/"  target="_blank" rel="noopener"
-    >Super-enhancer landscape reveals leukemia stem cell reliance on X-box binding protein 1 as a therapeutic vulnerability </a></p>
-<p>慢性粒细胞白血病（CML）患者的复发可能至少部分是因为白血病干细胞（LSCs）对酪氨酸激酶抑制剂（TKIs）如伊马替尼缺乏敏感性。LSC干性的精确调控尚不完全清楚。鉴于LSCs的特征受表观遗传调控，我们假设LSCs可能依赖于与超增强子（SE）相关的基因的持续主动转录，这反过来可能暗示了干预的机会。在这项研究中，作者检验了这一假设，并描绘了CML患者LSCs中的SE景观。细胞周期蛋白依赖性激酶7（CDK7）抑制剂THZ1对SE相关基因转录的破坏，有效地根除了逆转录病毒BCR-ABL驱动的CML小鼠中的LSCs，同时保留了正常的造血干细胞。此外，作者发现X-box结合蛋白1（XBP1）是未折叠蛋白反应途径中mRNA剪接内切酶IRE1α的底物，是LSCs中SE相关的癌基因。XBP1的敲除降低了原代CML CD34+细胞的存活率和自我更新能力，并根除了CML小鼠的LSCs。通过造血细胞特异性Ire1条件敲除选择性阻断Xbp1剪接形式的产生，抑制了CML的进展，并损害了CML小鼠中LSCs的白血病发生。</p>
-<h2 id="注意事项">注意事项
-</h2><p>1、<strong>一个好的抗体是CUT&amp;Tag成功的前提！</strong> 抗体要能识别天然构象蛋白且特异性强，最好选用文献验证过的抗体，实验前并进行IP验证。如果实在没有合适的抗体，可以选择标签蛋白，如FLAG和HA等经过有效验证的单克隆抗体。优先选用ChIP/ChIP-seq级别的候选抗体；ChIP级别抗体优于非ChIP级别抗体；文献验证过的抗体优于非文献验证过的抗体。<strong>ChIP级别抗体</strong>对抗体纯度、特异性结合的要求都比较高，是完成CUT&amp;Tag实验的首选抗体。如果没有找到目的基因的ChIP-seq级别的抗体，通过ChIP和IP验证的抗体也可以使用，但是尽量不要使用没有标注ChIP应用的抗体，或者标注未检测的抗体，否则实验效果可能不太理想。
-2、<strong>阴性对照设置</strong>  阴性对照使用与一抗相同种属的IgG 或者是不添加一抗的二抗。阴性对照证明抗体特异，实验结果可信。</p>
+    <h1 id="基因差异表达分析">基因差异表达分析
+</h1><hr>
+<h2 id="差异表达分析理论">差异表达分析理论
+</h2><p>基于RNA-seq的差异表达分析<a class="link" href="https://blingarida.github.io/2019/10/10/Differential%20expression%20analysis/"  target="_blank" rel="noopener"
+    >Differential expression analysis</a>的背景及标准流程。</p>
+<h2 id="基于在线网站的分析">基于在线网站的分析
+</h2><h3 id="tcga数据库">TCGA数据库
+</h3><p><strong>简介</strong>：TCGA数据库全称为The Cancer Genome Atlas，主要储存关于各类肿瘤的一个基本信息，包括RNAseq，miRNAseq，DNA甲基化，CNV，SNP等信息，它是目前为止可以获得的公开数据库里面数据相对全面的一个，在各个领域得到了广泛的应用，为肿瘤基础医学和转化医学研究者提供了海量的基因组数据和与其关联的临床数据,这为挖掘有意义的基因组变化和发现影响肿瘤起始、发展、分化、转移等生物学机制提供了海量数据基础。</p>
+<p><strong>在线分析网站</strong>：
+cBioportal(<a class="link" href="https://www.cbioportal.org/"  target="_blank" rel="noopener"
+    >cBioPortal for Cancer Genomics</a>)
+GEPIA2(<a class="link" href="http://gepia2.cancer-pku.cn/#index"  target="_blank" rel="noopener"
+    >GEPIA 2</a>)</p>
+<h3 id="geo数据库">GEO数据库
+</h3><p>1、GEO数据库介绍及检索：
+<a class="link" href="https://www.dxy.cn/bbs/newweb/pc/post/41987780"  target="_blank" rel="noopener"
+    >GEO数据库</a></p>
+<p>2、GEO2R在线分析差异表达基因</p>
+<p><a class="link" href="https://www.bilibili.com/video/BV1pG4y1r7vx/?vd_source=091cd6aed0a9811f8b13926e6c46c60b"  target="_blank" rel="noopener"
+    >GEO数据库介绍（四）：GEO2R在线分析筛选差异基因_哔哩哔哩_bilibili</a></p>
+<h2 id="利用r语言进行生信分析">利用R语言进行生信分析
+</h2><h3 id="r语言基础及学习教程">R语言基础及学习教程
+</h3><p>1、R语言学习
+学习视频可以参考生信技能树相关视频：</p>
+<p><a class="link" href="https://www.bilibili.com/video/BV1cs411j75B/?spm_id_from=333.337.search-card.all.click&amp;vd_source=091cd6aed0a9811f8b13926e6c46c60b"  target="_blank" rel="noopener"
+    >【生信技能树】生信人应该这样学R语言_哔哩哔哩_bilibili</a></p>
+<p>R语言基础知识可参考：
+<a class="link" href="https://cloud.tencent.com/developer/article/2325802"  target="_blank" rel="noopener"
+    >R语言基础1-腾讯云开发者社区-腾讯云</a>
+<a class="link" href="https://cloud.tencent.com/developer/article/2327685"  target="_blank" rel="noopener"
+    >R语言基础2-腾讯云开发者社区-腾讯云</a>
+<a class="link" href="https://cloud.tencent.com/developer/article/2328522"  target="_blank" rel="noopener"
+    >R语言基础3-腾讯云开发者社区-腾讯云</a>
+<a class="link" href="https://cloud.tencent.com/developer/article/2329457"  target="_blank" rel="noopener"
+    >R语言基础4(文件读写）-腾讯云开发者社区-腾讯云</a>
+<a class="link" href="https://cloud.tencent.com/developer/article/2330721"  target="_blank" rel="noopener"
+    >R语言基础5（绘图基础）-腾讯云开发者社区-腾讯云</a></p>
+<p>入门学习书籍阅读推荐：
+R语言实战.pdf
+<a class="link" href="https://pan.baidu.com/s/1uklnM0T5QLqrCPSnG6Lo2g?pwd=7lkd"  target="_blank" rel="noopener"
+    >链接</a>
+提取码：7lkd</p>
+<p>2、基于TCGA及GEO数据库的基因表达分析全部流程：
+<a class="link" href="https://blog.csdn.net/Eric_blog/article/details/104580174"  target="_blank" rel="noopener"
+    >GEO数据挖掘全流程分析</a>
+<a class="link" href="https://blog.csdn.net/Eric_blog/article/details/104989695"  target="_blank" rel="noopener"
+    >TCGA数据库下载及全流程分析（更新中）</a>
+<a class="link" href="https://cloud.tencent.com/developer/article/2332857"  target="_blank" rel="noopener"
+    >表达芯片数据分析1-腾讯云开发者社区-腾讯云</a>
+<a class="link" href="https://cloud.tencent.com/developer/article/2333690"  target="_blank" rel="noopener"
+    >表达芯片数据分析2-腾讯云开发者社区-腾讯云</a>
+<a class="link" href="https://cloud.tencent.com/developer/article/2334910"  target="_blank" rel="noopener"
+    >表达芯片数据分析3——基因差异分析绘制火山图及差异基因热图-腾讯云开发者社区-腾讯云</a>
+<a class="link" href="https://cloud.tencent.com/developer/article/2335340"  target="_blank" rel="noopener"
+    >表达芯片数据分析4——复杂数据及其分析（多分组数据）-腾讯云开发者社区-腾讯云</a>
+<a class="link" href="https://cloud.tencent.com/developer/article/2335342"  target="_blank" rel="noopener"
+    >表达芯片数据分析5——多组数据联合分析-腾讯云开发者社区-腾讯云</a></p>
+<p>最新更新于 2024.10.22</p>
 
 </section>
 
